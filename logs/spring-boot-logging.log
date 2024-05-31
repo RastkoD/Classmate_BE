@@ -1,0 +1,24 @@
+2024-05-31T22:02:55.630+02:00  INFO 7708 --- [classmate] [main] c.i.classmate.ClassmateApplication       : Starting ClassmateApplication using Java 17.0.9 with PID 7708 (C:\Users\ralel\Desktop\bootcamp\5Backend\classmate\target\classes started by Rale in C:\Users\ralel\Desktop\bootcamp\5Backend\classmate)
+2024-05-31T22:02:55.639+02:00  INFO 7708 --- [classmate] [main] c.i.classmate.ClassmateApplication       : No active profile set, falling back to 1 default profile: "default"
+2024-05-31T22:03:02.927+02:00  INFO 7708 --- [classmate] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2024-05-31T22:03:03.735+02:00  INFO 7708 --- [classmate] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 759 ms. Found 13 JPA repository interfaces.
+2024-05-31T22:03:05.699+02:00  INFO 7708 --- [classmate] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8080 (http)
+2024-05-31T22:03:05.732+02:00  INFO 7708 --- [classmate] [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2024-05-31T22:03:05.732+02:00  INFO 7708 --- [classmate] [main] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.19]
+2024-05-31T22:03:06.011+02:00  INFO 7708 --- [classmate] [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2024-05-31T22:03:06.012+02:00  INFO 7708 --- [classmate] [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 10101 ms
+2024-05-31T22:03:06.330+02:00  INFO 7708 --- [classmate] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2024-05-31T22:03:08.140+02:00  INFO 7708 --- [classmate] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@5f0f70c7
+2024-05-31T22:03:08.144+02:00  INFO 7708 --- [classmate] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2024-05-31T22:03:09.448+02:00  INFO 7708 --- [classmate] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2024-05-31T22:03:15.013+02:00  INFO 7708 --- [classmate] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2024-05-31T22:03:16.567+02:00  WARN 7708 --- [classmate] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2024-05-31T22:03:17.616+02:00  INFO 7708 --- [classmate] [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8080 (http) with context path ''
+2024-05-31T22:03:17.634+02:00  INFO 7708 --- [classmate] [main] c.i.classmate.ClassmateApplication       : Started ClassmateApplication in 24.158 seconds (process running for 26.876)
+2024-05-31T22:04:03.012+02:00  INFO 7708 --- [classmate] [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2024-05-31T22:04:03.013+02:00  INFO 7708 --- [classmate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2024-05-31T22:04:03.016+02:00  INFO 7708 --- [classmate] [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2024-05-31T22:09:14.414+02:00  INFO 7708 --- [classmate] [RMI TCP Connection(17)-127.0.0.1] inMXBeanRegistrar$SpringApplicationAdmin : Application shutdown requested.
+2024-05-31T22:09:14.437+02:00  INFO 7708 --- [classmate] [RMI TCP Connection(17)-127.0.0.1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2024-05-31T22:09:14.440+02:00  INFO 7708 --- [classmate] [RMI TCP Connection(17)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2024-05-31T22:09:14.466+02:00  INFO 7708 --- [classmate] [RMI TCP Connection(17)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
