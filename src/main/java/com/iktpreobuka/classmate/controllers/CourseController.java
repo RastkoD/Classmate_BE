@@ -92,7 +92,7 @@ public class CourseController {
 	}
 
 	// Create New Course
-	@PostMapping(value = "/create")
+	/*@PostMapping(value = "/create")
 	public ResponseEntity<?> createCourse(@RequestBody CourseDTO newCourseDTO) {
 		try {
             CourseEntity newCourse = CourseMapper.toEntity(newCourseDTO);
@@ -115,10 +115,35 @@ public class CourseController {
         } catch (Exception e) {
             return new ResponseEntity<>("Failed to create course: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+	}*/
+	
+	@PostMapping(value = "/create")
+	public ResponseEntity<?> createCourse(@RequestBody CourseDTO newCourseDTO) {
+	    try {
+	        CourseEntity newCourse = CourseMapper.toEntity(newCourseDTO);
+
+	        TermEntity termEntity = termRepository.findById(newCourseDTO.getTermId()).orElse(null);
+	        newCourse.setTerm(termEntity);
+
+	        GradeEntity gradeEntity = gradeRepository.findById(newCourseDTO.getGradeId()).orElse(null);
+	        newCourse.setCourseGrade(gradeEntity);
+
+	        CourseEntity createdCourse = courseDao.createCourse(newCourse);
+
+	        CourseDTO createdCourseDTO = CourseMapper.toDTO(createdCourse);
+	        createdCourseDTO.setTermId(termEntity.getTermId());
+	        createdCourseDTO.setGradeId(gradeEntity.getGradeId());
+
+	        logger.info("Admin created new course: " + createdCourseDTO.getCourseName());
+
+	        return new ResponseEntity<>(createdCourseDTO, HttpStatus.CREATED);
+	    } catch (Exception e) {
+	        return new ResponseEntity<>("{\"message\": \"Failed to create course: " + e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
+	    }
 	}
 
 	// Update Course
-	@PutMapping(value = "/update/{courseId}")
+	/*@PutMapping(value = "/update/{courseId}")
 	public ResponseEntity<?> modifyCourse(@PathVariable Long courseId,
 			@RequestBody CourseDTO updatedCourseDTO) {
 		try {
@@ -148,6 +173,38 @@ public class CourseController {
         } catch (Exception e) {
             return new ResponseEntity<>("Failed to update course: " + e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+	}*/
+	
+	@PutMapping(value = "/update/{courseId}")
+	public ResponseEntity<?> modifyCourse(@PathVariable Long courseId,
+	                                      @RequestBody CourseDTO updatedCourseDTO) {
+	    try {
+	        CourseEntity existingCourse = courseDao.getCourseById(courseId);
+	        if (existingCourse == null) {
+	            return new ResponseEntity<>("{\"message\": \"Course not found.\"}", HttpStatus.NOT_FOUND);
+	        }
+
+	        existingCourse.setCourseName(updatedCourseDTO.getCourseName());
+	        existingCourse.setWeekUnits(updatedCourseDTO.getWeekUnits());
+
+	        TermEntity termEntity = termRepository.findById(updatedCourseDTO.getTermId()).orElse(null);
+	        existingCourse.setTerm(termEntity);
+
+	        GradeEntity gradeEntity = gradeRepository.findById(updatedCourseDTO.getGradeId()).orElse(null);
+	        existingCourse.setCourseGrade(gradeEntity);
+
+	        CourseEntity updatedCourse = courseDao.updateCourse(courseId, existingCourse);
+
+	        CourseDTO updatedCourseResponse = CourseMapper.toDTO(updatedCourse);
+	        updatedCourseResponse.setTermId(termEntity.getTermId());
+	        updatedCourseResponse.setGradeId(gradeEntity.getGradeId());
+
+	        logger.info("Admin updated course: " + updatedCourse.getCourseName());
+
+	        return new ResponseEntity<>(updatedCourseResponse, HttpStatus.OK);
+	    } catch (Exception e) {
+	        return new ResponseEntity<>("{\"message\": \"Failed to update course: " + e.getMessage() + "\"}", HttpStatus.BAD_REQUEST);
+	    }
 	}
 
 	// Delete Course
@@ -156,12 +213,15 @@ public class CourseController {
 		CourseEntity deleteCourse = courseDao.getCourseById(courseId);
 
 		if(deleteCourse == null) {
-			return new ResponseEntity<>("Course not found", HttpStatus.NOT_FOUND);
+			//return new ResponseEntity<>("Course not found", HttpStatus.NOT_FOUND);
+			return new ResponseEntity<>("{\"message\": \"Course not found\"}", HttpStatus.NOT_FOUND);
 		}
-
+		
+		logger.info("Admin deleted course: " + deleteCourse.getCourseName());
 		courseDao.deleteCourse(courseId);
 
-		return new ResponseEntity<>("Course deleted.", HttpStatus.OK);
+		//return new ResponseEntity<>("Course deleted.", HttpStatus.OK);
+		return new ResponseEntity<>("{\"message\": \"Course deleted.\"}", HttpStatus.OK);
 	}
 
 	// Create Course With Teacher

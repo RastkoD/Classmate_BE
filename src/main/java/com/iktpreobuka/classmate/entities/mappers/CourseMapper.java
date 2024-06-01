@@ -28,6 +28,7 @@ public class CourseMapper {
 		CourseDTO dto = new CourseDTO();
 		dto.setCourseName(entity.getCourseName());
 		dto.setWeekUnits(entity.getWeekUnits());
+		dto.setCourseId(entity.getCourseId());
 		
 		return dto;
 	}

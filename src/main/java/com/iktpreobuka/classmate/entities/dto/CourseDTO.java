@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class CourseDTO {
+	private Long courseId;
 	
 	@NotNull(message = "Course name must not be null.")
 	@Size(min = 5, max = 30, message = "Course name must be between {min} and {max} characters.")
@@ -25,12 +26,21 @@ public class CourseDTO {
 		// TODO Auto-generated constructor stub
 	}
 
-	public CourseDTO(String courseName, int weekUnits, Long termId, Long gradeId) {
+	public CourseDTO(Long courseId, String courseName, int weekUnits, Long termId, Long gradeId) {
 		super();
+		this.courseId = courseId;
 		this.courseName = courseName;
 		this.weekUnits = weekUnits;
 		this.termId = termId;
 		this.gradeId = gradeId;
+	}
+	
+	public Long getCourseId() {
+		return courseId;
+	}
+
+	public void setCourseId(Long courseId) {
+		this.courseId = courseId;
 	}
 
 	public String getCourseName() {
