@@ -160,7 +160,7 @@ public class AssessmentController {
         
         assessmentDao.deleteAssessment(assessId);
         
-        return new ResponseEntity<>("Assessment deleted", HttpStatus.OK);
+        return new ResponseEntity<>("{\"message\": \"Assessment deleted.\"}", HttpStatus.OK);
     }
     
     // Get All Assessments for Student
@@ -170,14 +170,14 @@ public class AssessmentController {
     	List<AssessmentEntity> assessments = assessmentDao.getAssessmentsByStudentId(studentId);
     	
     	if(assessments.isEmpty()) {
-    		return new ResponseEntity<>("No assessments found for this student", HttpStatus.NOT_FOUND);
+    		return new ResponseEntity<>("{\"message\": \"No assessments found for this student\"}", HttpStatus.NOT_FOUND);
     	}
     	
     	List<AssessmentDTO> assessmentDTOs = assessments.stream()
     			.map(assessmentMapper::toDTO)
     			.collect(Collectors.toList());
     	
-    	logger.info("All assessments returned for student: " + studentDao.getStudentById(studentId).getUsername());
+    	logger.info("{\"message\": \"All assessments returned for student: \"}" + studentDao.getStudentById(studentId).getUsername());
     	
     	return new ResponseEntity<>(assessmentDTOs, HttpStatus.OK);
     }
@@ -190,14 +190,14 @@ public class AssessmentController {
     	List<AssessmentEntity> assessments = assessmentDao.getAssessmentsByStudentId(studentId);
     	
     	if(assessments.isEmpty()) {
-    		return new ResponseEntity<>("No assessments found for this student", HttpStatus.NOT_FOUND);
+    		return new ResponseEntity<>("{\"message\": \"No assessments found for this student\"}", HttpStatus.NOT_FOUND);
     	}
     	
     	List<AssessmentDTO> assessmentDTOs = assessments.stream()
     			.map(assessmentMapper::toDTO)
     			.collect(Collectors.toList());
     	
-    	logger.info("All assessments returned for student: " + studentDao.getStudentById(studentId).getUsername() + " by admin");
+    	logger.info("{\"message\": \"All assessments returned for student: \"}" + studentDao.getStudentById(studentId).getUsername() + " by admin");
     	
     	return new ResponseEntity<>(assessmentDTOs, HttpStatus.OK);
     }
@@ -210,14 +210,14 @@ public class AssessmentController {
     	List<AssessmentEntity> assessments = assessmentDao.getAssessmentsByStudentId(studentId);
     	
     	if(assessments.isEmpty()) {
-    		return new ResponseEntity<>("No assessments found for this student", HttpStatus.NOT_FOUND);
+    		return new ResponseEntity<>("{\"message\": \"No assessments found for this student\"}", HttpStatus.NOT_FOUND);
     	}
     	
     	List<AssessmentDTO> assessmentDTOs = assessments.stream()
     			.map(assessmentMapper::toDTO)
     			.collect(Collectors.toList());
     	
-    	logger.info("All assessments returned for student: " + studentDao.getStudentById(studentId).getUsername() + " by student");
+    	logger.info("{\"message\": \"All assessments returned for student: \"}" + studentDao.getStudentById(studentId).getUsername() + " by student");
     	
     	return new ResponseEntity<>(assessmentDTOs, HttpStatus.OK);
     }
@@ -230,14 +230,14 @@ public class AssessmentController {
     		List<AssessmentEntity> assessments = assessmentDao.getAssessmentsByStudentIdAndCourseId(studentId, courseId);
     		
     		if(assessments.isEmpty()) {
-    			return new ResponseEntity<>("No assessments found for this student and course", HttpStatus.NOT_FOUND);
+    			return new ResponseEntity<>("{\"message\": \"No assessments found for this student and course\"}", HttpStatus.NOT_FOUND);
     		}
     		
     		List<AssessmentDTO> assessmentDTOs = assessments.stream()
     				.map(assessmentMapper::toDTO)
     				.collect(Collectors.toList());
     		
-    		logger.info("All assessments returned for student: " + studentDao.getStudentById(studentId).getUsername() + ", course: " + courseDao.getCourseById(courseId).getCourseName());
+    		logger.info("{\"message\": \"All assessments returned for student: \"}" + studentDao.getStudentById(studentId).getUsername() + ", course: " + courseDao.getCourseById(courseId).getCourseName());
     		
     		return new ResponseEntity<>(assessmentDTOs, HttpStatus.OK);
     }
