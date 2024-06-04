@@ -24,7 +24,6 @@ public class AssessmentDTO {
     private Integer mark;
 	
     @JsonView(Views.AdminView.class)
-    @JsonFormat(pattern = "dd-MM-yyyy")
     private LocalDateTime date;
     
     @JsonView(Views.AdminView.class)
@@ -177,4 +176,3 @@ public class AssessmentDTO {
 	
 	
 }
-

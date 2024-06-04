@@ -37,7 +37,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api/students")
-@CrossOrigin(origins = "*")
 public class StudentController {
 
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
@@ -85,33 +84,30 @@ public class StudentController {
 
 	@PutMapping(value = "/update/{studentId}")
 	public ResponseEntity<StudentDTO> modifyStudent(@PathVariable Long studentId,
-			@Valid @RequestBody StudentDTO updatedStudentDTO) {
-		StudentEntity existingStudent = studentDao.getStudentById(studentId);
-		if (existingStudent == null) {
-			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-		}
-		StudentEntity updatedStudent = studentMapper.toEntity(updatedStudentDTO);
-
-		updatedStudent.setUserId(studentId);
-		studentDao.updateStudent(studentId, updatedStudent);
-
-		logger.info("Admin updated student: " + updatedStudent.getUsername());
-
-		return new ResponseEntity<>(studentMapper.toDTO(updatedStudent), HttpStatus.OK);
+	                                                @Valid @RequestBody StudentDTO updatedStudentDTO) {
+	    logger.info("Received studentId: " + studentId); // Log studentId
+	    StudentEntity existingStudent = studentDao.getStudentById(studentId);
+	    if (existingStudent == null) {
+	        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+	    }
+	    StudentEntity updatedStudent = studentMapper.toEntity(updatedStudentDTO);
+	    updatedStudent.setUserId(studentId);
+	    studentDao.updateStudent(studentId, updatedStudent);
+	    logger.info("Admin updated student: " + updatedStudent.getUsername());
+	    return new ResponseEntity<>(studentMapper.toDTO(updatedStudent), HttpStatus.OK);
 	}
 
 	@DeleteMapping(value = "/delete/{studentId}")
 	public ResponseEntity<?> deleteStudent(@PathVariable Long studentId) {
-		StudentEntity student = studentDao.getStudentById(studentId);
-
-		if (student == null) {
-			return new ResponseEntity<>("Student not found", HttpStatus.NOT_FOUND);
-		}
-		studentDao.deleteStudent(studentId);
-
-		return new ResponseEntity<>("Student deleted", HttpStatus.OK);
+	    logger.info("Received studentId: " + studentId); // Log studentId
+	    StudentEntity student = studentDao.getStudentById(studentId);
+	    if (student == null) {
+	        return new ResponseEntity<>("{\"message\": \"Assessment deleted.\"}", HttpStatus.NOT_FOUND);
+	    }
+	    studentDao.deleteStudent(studentId);
+	    return new ResponseEntity<>("{\"message\": \"Assessment deleted.\"}", HttpStatus.OK);
 	}
-
+	
 	@PostMapping(value = "/{studentId}/guardian/{guardianId}")
 	public ResponseEntity<?> addGuardianToStudent(@PathVariable Long studentId, @PathVariable Long guardianId) {
 		StudentEntity student = studentDao.getStudentById(studentId);

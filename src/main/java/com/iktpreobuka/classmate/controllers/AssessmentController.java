@@ -1,4 +1,4 @@
-package com.iktpreobuka.classmate.controllers;
+ package com.iktpreobuka.classmate.controllers;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -41,7 +41,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api/assessments")
-@CrossOrigin(origins = "*")
 public class AssessmentController {
 	
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
@@ -138,7 +137,7 @@ public class AssessmentController {
         AssessmentEntity updatedAssessment = assessmentMapper.toEntity(updatedAssessmentDTO);
         
         updatedAssessment.setAssessmentId(assessId);
-        updatedAssessment.setDate(LocalDateTime.now());
+        updatedAssessment.setDate(existingAssessment.getDate());
         
         AssessmentEntity modifiedAssessment = assessmentDao.updateAssessment(assessId, updatedAssessment);
         AssessmentDTO modifiedAssessmentDTO = assessmentMapper.toDTO(modifiedAssessment);

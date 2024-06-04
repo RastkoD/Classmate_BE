@@ -20,5 +20,4 @@ public interface CourseDao {
 	
 	 List<CourseEntity> getCoursesByTermAndGrade(TermEntity termEntity, GradeEntity gradeEntity);
 
-
 }

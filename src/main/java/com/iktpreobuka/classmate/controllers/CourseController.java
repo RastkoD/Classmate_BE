@@ -29,7 +29,6 @@ import com.iktpreobuka.classmate.services.CourseDao;
 
 @RestController
 @RequestMapping(value = "/api/courses")
-@CrossOrigin(origins = "*")
 public class CourseController {
 	
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
@@ -44,51 +43,51 @@ public class CourseController {
 	private GradeRepository gradeRepository;
 
 	@GetMapping
-	 public ResponseEntity<?> getAll() {
-        Iterable<CourseEntity> courses = courseDao.getAllCourses();
-        List<CourseDTO> courseDTOs = new ArrayList<>();
+	public ResponseEntity<?> getAll() {
+	    Iterable<CourseEntity> courses = courseDao.getAllCourses();
+	    List<CourseDTO> courseDTOs = new ArrayList<>();
 
-        for (CourseEntity course : courses) {
-            CourseDTO courseDTO = CourseMapper.toDTO(course);
+	    for (CourseEntity course : courses) {
+	        CourseDTO courseDTO = CourseMapper.toDTO(course);
 
-            TermEntity termEntity = course.getTerm();
-            if (termEntity != null) {
-                courseDTO.setTermId(termEntity.getTermId());
-            }
-            
-            GradeEntity gradeEntity = course.getCourseGrade();
-            if (gradeEntity != null) {
-                courseDTO.setGradeId(course.getCourseId());
-            }
+	        TermEntity termEntity = course.getTerm();
+	        if (termEntity != null) {
+	            courseDTO.setTermId(termEntity.getTermId());
+	        }
+	        
+	        GradeEntity gradeEntity = course.getCourseGrade();
+	        if (gradeEntity != null) {
+	            courseDTO.setGradeId(gradeEntity.getGradeId());
+	        }
 
-            courseDTOs.add(courseDTO);
-        }
+	        courseDTOs.add(courseDTO);
+	    }
 
-        return new ResponseEntity<>(courseDTOs, HttpStatus.OK);
-    }
+	    return new ResponseEntity<>(courseDTOs, HttpStatus.OK);
+	}
 
 	// Get By Id
 	@GetMapping(value = "/{courseId}")
 	public ResponseEntity<?> getById(@PathVariable Long courseId) {
-		CourseEntity course = courseDao.getCourseById(courseId);
+	    CourseEntity course = courseDao.getCourseById(courseId);
 
-        if (course == null) {
-            return new ResponseEntity<>("Course not found.", HttpStatus.NOT_FOUND);
-        }
+	    if (course == null) {
+	        return new ResponseEntity<>("Course not found.", HttpStatus.NOT_FOUND);
+	    }
 
-        CourseDTO courseDTO = CourseMapper.toDTO(course);
+	    CourseDTO courseDTO = CourseMapper.toDTO(course);
 
-        TermEntity termEntity = course.getTerm();
-        if (termEntity != null) {
-            courseDTO.setTermId(termEntity.getTermId());
-        }
-        
-        GradeEntity gradeEntity = course.getCourseGrade();
-        if (gradeEntity != null) {
-            courseDTO.setGradeId(course.getCourseId());
-        }
+	    TermEntity termEntity = course.getTerm();
+	    if (termEntity != null) {
+	        courseDTO.setTermId(termEntity.getTermId());
+	    }
+	    
+	    GradeEntity gradeEntity = course.getCourseGrade();
+	    if (gradeEntity != null) {
+	        courseDTO.setGradeId(gradeEntity.getGradeId());
+	    }
 
-        return new ResponseEntity<>(courseDTO, HttpStatus.OK);
+	    return new ResponseEntity<>(courseDTO, HttpStatus.OK);
 	}
 
 	// Create New Course

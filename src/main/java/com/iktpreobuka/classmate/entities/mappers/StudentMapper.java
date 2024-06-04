@@ -36,6 +36,7 @@ public class StudentMapper {
         entity.setDeleted(false);
         entity.setJmbg(dto.getJmbg());
         entity.setUserRole(roleRepository.findByRoleName(RoleEnum.STUDENT).get());
+        entity.setUserId(dto.getStudentId());
         return entity;
     }
 
@@ -50,6 +51,7 @@ public class StudentMapper {
         dto.setLastName(entity.getLastName());
         dto.setDeleted(entity.isDeleted());
         dto.setJmbg(entity.getJmbg());
+        dto.setStudentId(entity.getUserId());
         
         if(entity.getGuardian() != null) {
             dto.setGuardian(guardianMapper.toDTO(entity.getGuardian()));

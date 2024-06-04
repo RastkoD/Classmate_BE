@@ -41,7 +41,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api/teachers")
-@CrossOrigin(origins = "*")
 public class TeacherController {
 	
 	private final Logger logger = (Logger) LoggerFactory.getLogger(this.getClass());
