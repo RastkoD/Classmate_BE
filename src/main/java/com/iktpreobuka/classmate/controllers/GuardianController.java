@@ -34,7 +34,6 @@ import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping(value = "/api/guardians")
-@CrossOrigin(origins = "*")
 public class GuardianController {
 	
 	@Autowired

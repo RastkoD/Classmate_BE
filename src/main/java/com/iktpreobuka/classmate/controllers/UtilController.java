@@ -20,14 +20,13 @@ import com.iktpreobuka.classmate.services.FileHandler;
 
 @RestController
 @RequestMapping(value = "/api/util/")
-@CrossOrigin(origins = "*")
 public class UtilController {
 	
 	@Autowired
 	private FileHandler fileHandler;
 
 	//@Secured("ADMIN")
-	@GetMapping(value = "/download")
+	@GetMapping(value = "/download-logs")
 	public ResponseEntity<Resource> downloadLogs() {
 	    try {
 	        File file = fileHandler.getLogs();
